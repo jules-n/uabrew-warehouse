@@ -9,9 +9,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class Product {
-    private String _id;
+public class Characteristic<T> {
     private String name;
-    private String bar;
-    private Integer amount;
+    private T value;
 }
