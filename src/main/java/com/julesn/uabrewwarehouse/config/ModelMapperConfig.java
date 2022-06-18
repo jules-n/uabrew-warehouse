@@ -17,6 +17,7 @@ public class ModelMapperConfig {
     public ModelMapper modelMapper() {
         ModelMapper modelMapper = new ModelMapper();
         modelMapper.addConverter(positionToMenuPositionConverter);
+        modelMapper.addConverter(positionMenuToPositionConverter);
         return modelMapper;
     }
 
@@ -29,6 +30,19 @@ public class ModelMapperConfig {
                     .amount(model.getAmount())
                     .price(model.getPrice())
                     .build();
+            return position;
+        }
+    };
+
+    private Converter<MenuPosition, Position> positionMenuToPositionConverter = new AbstractConverter<>() {
+        protected Position convert(MenuPosition dto) {
+            var position = Position.builder()
+                    .characteristics(dto.getCharacteristics())
+                    .components(dto.getComponents())
+                    .price(dto.getPrice())
+                    .build();
+            position.setName(dto.getName());
+            position.setAmount(dto.getAmount());
             return position;
         }
     };
