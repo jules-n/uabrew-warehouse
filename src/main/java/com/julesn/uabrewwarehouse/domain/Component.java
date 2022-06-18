@@ -10,6 +10,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Builder
 public class Component {
-    private String productId;
+    private String name;
     private Integer amount;
 }

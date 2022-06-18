@@ -19,4 +19,5 @@ public class Position extends Product {
     @Nullable
     private List<Component> components;
     private Integer price;
+    private Integer amount;
 }

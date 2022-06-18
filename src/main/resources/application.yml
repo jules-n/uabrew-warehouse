@@ -1,0 +1,11 @@
+server:
+  port: 9096
+mongock:
+  change-logs-scan-package:
+    - com.julesn.uabrewwarehouse.migration
+spring:
+  data:
+    mongodb:
+      host: ${MONGODB_HOST:localhost}
+      port: ${MONGODB_PORT:27017}
+      database: ${MONGODB_DATABASE:warehouse}

@@ -1,4 +1,4 @@
-package com.julesn.uabrewwarehouse.domain;
+package com.julesn.uabrewwarehouse.dtos;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,9 +9,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class Product {
-    private String _id;
+public class MenuIngredient {
     private String name;
-    private String bar;
     private Integer totalAmount;
 }
