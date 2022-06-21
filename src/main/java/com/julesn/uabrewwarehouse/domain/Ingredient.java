@@ -5,7 +5,6 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 @EqualsAndHashCode(callSuper = true)
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
 @Builder
 @Document(collection = Ingredient.collection)

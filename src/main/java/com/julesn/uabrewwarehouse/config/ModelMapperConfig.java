@@ -24,9 +24,9 @@ public class ModelMapperConfig {
         return modelMapper;
     }
 
-    private Converter<Position, MenuPosition> positionToMenuPositionConverter = new AbstractConverter<>() {
+    private Converter<Position, MenuPosition> positionToMenuPositionConverter = new AbstractConverter<Position, MenuPosition>() {
         protected MenuPosition convert(Position model) {
-            var position = MenuPosition.builder()
+            MenuPosition position = MenuPosition.builder()
                     .name(model.getName())
                     .characteristics(model.getCharacteristics())
                     .components(model.getComponents())
@@ -37,9 +37,9 @@ public class ModelMapperConfig {
         }
     };
 
-    private Converter<MenuPosition, Position> positionMenuToPositionConverter = new AbstractConverter<>() {
+    private Converter<MenuPosition, Position> positionMenuToPositionConverter = new AbstractConverter<MenuPosition, Position>() {
         protected Position convert(MenuPosition dto) {
-            var position = Position.builder()
+            Position position = Position.builder()
                     .characteristics(dto.getCharacteristics())
                     .components(dto.getComponents())
                     .price(dto.getPrice())
@@ -50,18 +50,18 @@ public class ModelMapperConfig {
         }
     };
 
-    private Converter<MenuIngredient, Ingredient> ingredientMenuToIngredientConverter = new AbstractConverter<>() {
+    private Converter<MenuIngredient, Ingredient> ingredientMenuToIngredientConverter = new AbstractConverter<MenuIngredient, Ingredient>() {
         protected Ingredient convert(MenuIngredient dto) {
-            var model = new Ingredient();
+            Ingredient model = new Ingredient();
             model.setTotalAmount(dto.getTotalAmount());
             model.setName(dto.getName());
             return model;
         }
     };
 
-    private Converter<Ingredient, MenuIngredient> ingredientToMenuIngredientConverter = new AbstractConverter<>() {
+    private Converter<Ingredient, MenuIngredient> ingredientToMenuIngredientConverter = new AbstractConverter<Ingredient, MenuIngredient>() {
         protected MenuIngredient convert(Ingredient model) {
-            var dto = MenuIngredient.builder()
+            MenuIngredient dto = MenuIngredient.builder()
                     .totalAmount(model.getTotalAmount())
                     .name(model.getName())
                     .build();

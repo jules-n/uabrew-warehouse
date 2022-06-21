@@ -31,4 +31,12 @@ public class DBChangelogProduct001 {
                         }}), new IndexOptions().unique(true));
     }
 
+    @ChangeSet(order = "002", id = "create unique index for product name", author="jules-n")
+    public void insertProductsIndexesForName(MongoDatabase mongo) {
+        var collection = mongo.getCollection(Position.collection);
+        collection.createIndex(new BasicDBObject("name", 1), new IndexOptions().unique(true));
+        collection = mongo.getCollection(Ingredient.collection);
+        collection.createIndex(new BasicDBObject("name", 1), new IndexOptions().unique(true));
+    }
+
 }

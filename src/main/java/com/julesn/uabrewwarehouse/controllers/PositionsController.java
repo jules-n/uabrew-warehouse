@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/positions")
@@ -42,11 +43,23 @@ public class PositionsController {
 
     @GetMapping("{bar}/order/check")
     ResponseEntity checkOrder(@PathVariable("bar") String bar, Map<String, Integer> ordersPositions) {
-        return null;
+        var positions = ordersPositions.entrySet().stream().map(
+                entry -> positionService.getPositionByName(bar, entry.getKey())
+        ).collect(Collectors.toList());
+
+        var result = positions.stream().allMatch(position -> {
+            return positionService.checkAmount(position, ordersPositions.get(position.getName())) != null;
+        });
+        return result? ResponseEntity.ok().build() : ResponseEntity.badRequest().build();
     }
 
     @PutMapping("{bar}/updateAmounts")
     ResponseEntity updateAmounts(@PathVariable("bar") String bar, Map<String, Integer> ordersPositions) {
-        return null;
+        ordersPositions.forEach(
+                (position, number)   -> {
+                    positionService.findAndChangeAmountOfSubComponents(bar, position, number);
+                }
+        );
+        return ResponseEntity.ok().build();
     }
 }

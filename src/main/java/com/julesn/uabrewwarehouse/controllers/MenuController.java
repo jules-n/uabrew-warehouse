@@ -1,7 +1,7 @@
 package com.julesn.uabrewwarehouse.controllers;
 
 import com.julesn.uabrewwarehouse.dtos.Menu;
-import com.julesn.uabrewwarehouse.services.MenuService;
+import com.julesn.uabrewwarehouse.services.menu.MenuService;
 import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

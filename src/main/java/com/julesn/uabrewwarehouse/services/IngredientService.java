@@ -6,7 +6,7 @@ public interface IngredientService {
 
     boolean save(Ingredient ingredient);
 
-    boolean update(Ingredient position, String name);
+    boolean update(Ingredient ingredient, String name);
 
     boolean delete(String bar, String name);
 }

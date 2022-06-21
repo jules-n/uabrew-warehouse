@@ -9,3 +9,5 @@ spring:
       host: ${MONGODB_HOST:localhost}
       port: ${MONGODB_PORT:27017}
       database: ${MONGODB_DATABASE:warehouse}
+      username: ${MONGODB_USER:Kharkiv_student}
+      password: ${MONGODB_PASS:Glory_to_Ukraine}
