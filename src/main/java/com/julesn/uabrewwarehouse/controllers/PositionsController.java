@@ -42,7 +42,7 @@ public class PositionsController {
     }
 
     @GetMapping("{bar}/order/check")
-    ResponseEntity checkOrder(@PathVariable("bar") String bar, Map<String, Integer> ordersPositions) {
+    ResponseEntity<Boolean> checkOrder(@PathVariable("bar") String bar, Map<String, Integer> ordersPositions) {
         var positions = ordersPositions.entrySet().stream().map(
                 entry -> positionService.getPositionByName(bar, entry.getKey())
         ).collect(Collectors.toList());
@@ -50,16 +50,16 @@ public class PositionsController {
         var result = positions.stream().allMatch(position -> {
             return positionService.checkAmount(position, ordersPositions.get(position.getName())) != null;
         });
-        return result? ResponseEntity.ok().build() : ResponseEntity.badRequest().build();
+        return result? ResponseEntity.ok(true) : ResponseEntity.badRequest().build();
     }
 
     @PutMapping("{bar}/updateAmounts")
-    ResponseEntity updateAmounts(@PathVariable("bar") String bar, Map<String, Integer> ordersPositions) {
+    ResponseEntity<Boolean> updateAmounts(@PathVariable("bar") String bar, Map<String, Integer> ordersPositions) {
         ordersPositions.forEach(
                 (position, number)   -> {
                     positionService.findAndChangeAmountOfSubComponents(bar, position, number);
                 }
         );
-        return ResponseEntity.ok().build();
+        return ResponseEntity.ok(true);
     }
 }
