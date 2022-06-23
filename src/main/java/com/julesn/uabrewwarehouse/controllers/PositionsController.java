@@ -41,6 +41,11 @@ public class PositionsController {
         return positionService.delete(bar, name) ? ResponseEntity.ok().build() : ResponseEntity.badRequest().build();
     }
 
+    @GetMapping("{bar}/{name}")
+    ResponseEntity<Position> getPosition(@PathVariable("bar") String bar, @PathVariable("name") String name) {
+        var position = positionService.getPositionByName(bar, name);
+        return  ResponseEntity.ok(position);
+    }
     @GetMapping("{bar}/order/check")
     ResponseEntity<Boolean> checkOrder(@PathVariable("bar") String bar, Map<String, Integer> ordersPositions) {
         var positions = ordersPositions.entrySet().stream().map(
